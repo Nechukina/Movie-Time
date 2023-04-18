@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { addReviewAction } from '../../store/api-actions';
 import { getChoosedFilm } from '../../store/films-data/films-data.selectors';
 import { NewReview } from '../../types/reviews';
+import { toast } from 'react-toastify';
 
 const REVIEW_TEXT_MIN_COUNT = 50;
 const REVIEW_TEXT_MAX_COUNT = 400;
@@ -21,13 +22,22 @@ function ReviewForm(): JSX.Element {
   const [isDisabled, setDisabled] = useState(true);
 
   const onSubmit = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-    const reviewData: NewReview = {comment: formData['review-text'], rating: formData.rating};
-    setDisabled(true);
-    dispatch(addReviewAction(reviewData));
-    setDisabled(false);
-    navigate(`/films/${choosedFilm?.id as number}`);
+    (async () => {
+      evt.preventDefault();
+      const reviewData: NewReview = {comment: formData['review-text'], rating: formData.rating};
+      setDisabled(true);
+
+      const action = await dispatch(addReviewAction(reviewData));
+      if (addReviewAction.fulfilled.match(action)) {
+
+        navigate(`/films/${choosedFilm?.id as number}`);
+      } else {
+        toast.error(action.error.message, { toastId: action.error.code });
+      }
+      setDisabled(false);
+    })();
   };
+
 
   const submitHandler = ( evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
 
