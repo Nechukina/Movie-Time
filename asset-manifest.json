@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Nechukina/1875419-what-to-watch-12/static/css/main.7de45d20.css",
+    "main.js": "/Nechukina/1875419-what-to-watch-12/static/js/main.ce9ec62f.js",
+    "index.html": "/Nechukina/1875419-what-to-watch-12/index.html",
+    "main.7de45d20.css.map": "/Nechukina/1875419-what-to-watch-12/static/css/main.7de45d20.css.map",
+    "main.ce9ec62f.js.map": "/Nechukina/1875419-what-to-watch-12/static/js/main.ce9ec62f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7de45d20.css",
+    "static/js/main.ce9ec62f.js"
+  ]
+}
